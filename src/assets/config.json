@@ -2,7 +2,7 @@
     "title": "Pong",
     "screen_width" : 400,
     "screen_height" : 300,
-    "bg_r": 200,
+    "bg_r": 100,
     "bg_g": 200,
     "bg_b": 200,
     "FPS" : 30,
