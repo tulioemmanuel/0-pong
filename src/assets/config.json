@@ -1,0 +1,11 @@
+{
+    "title": "Pong",
+    "screen_width" : 400,
+    "screen_height" : 300,
+    "bg_r": 100,
+    "bg_g": 100,
+    "bg_b": 100,
+    "FPS" : 30,
+    "paddle_width":10,
+    "paddle_height":100
+}
