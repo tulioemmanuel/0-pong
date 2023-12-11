@@ -1,6 +1,6 @@
 import json
 import os
-
+import sys
 
 class SingletonMeta(type):
     _instances = {}
@@ -21,9 +21,9 @@ class Configuration(metaclass=SingletonMeta):
 
     def __init__(self):
         assets_dir_path = os.path.join(
-            os.path.abspath("."),
-            Configuration.SRC_FOLDER_NAME,
-            Configuration.ASSETS_FOLDER_NAME,
+            os.path.join(os.getcwd(), Configuration.ASSETS_FOLDER_NAME)
+            if sys.platform == "emscripten"
+            else os.path.join(os.getcwd(), Configuration.SRC_FOLDER_NAME, Configuration.ASSETS_FOLDER_NAME)
         )
         with open(
             os.path.join(assets_dir_path, Configuration.CONFIGURATION_JSON_FILE_NAME)

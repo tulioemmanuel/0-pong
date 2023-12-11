@@ -1,11 +1,22 @@
 {
     "title": "Pong",
-    "screen_width" : 400,
-    "screen_height" : 300,
+    "screen_width": 400,
+    "screen_height": 300,
     "bg_r": 100,
     "bg_g": 200,
     "bg_b": 200,
-    "FPS" : 30,
-    "paddle_width":10,
-    "paddle_height":100
+    "FPS": 30,
+    "paddle_width": 10,
+    "paddle_height": 100,
+    "paddle_color_r": 255,
+    "paddle_color_g": 255,
+    "paddle_color_b": 255,
+    "paddle_vy": 10,
+    "ball_size": 10,
+    "ball_color_r": 0,
+    "ball_color_g": 0,
+    "ball_color_b": 0,
+    "points_color_r": 255,
+    "points_color_g": 255,
+    "points_color_b": 255
 }

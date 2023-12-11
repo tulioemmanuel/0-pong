@@ -16,16 +16,59 @@ class Renderer(System):
         self.screen = pygame.display.set_mode(
             (self.settings["screen_width"], self.settings["screen_height"])
         )
+        
+        if not pygame.font.get_init():
+          pygame.font.init()  
+
+        self.font = pygame.font.SysFont(None, 24)
+
         logging.info("Renderer initialized")
 
     def _clear(self):
-        self.screen.fill((self.settings['bg_r'], self.settings['bg_g'], self.settings['bg_b']))
+        self.screen.fill(
+            (self.settings["bg_r"], self.settings["bg_g"], self.settings["bg_b"])
+        )
+
+    def update_points(self):
+        self._draw_points()
+
+    def _draw_points(self):
+        player_points_txt = self.font.render(
+            str(self.game.player_points),
+            False,
+            (
+                self.settings["points_color_r"],
+                self.settings["points_color_g"],
+                self.settings["points_color_b"],
+            ),
+        )
+        enemy_points_txt = self.font.render(
+            str(self.game.enemy_points),
+            False,
+            (
+                self.settings["points_color_r"],
+                self.settings["points_color_g"],
+                self.settings["points_color_b"],
+            ),
+        )
+
+        self.screen.blit(player_points_txt,(self.screen.get_width()/4 - player_points_txt.get_width()/2, 10))
+        self.screen.blit(enemy_points_txt,(3*self.screen.get_width()/4 - 3*enemy_points_txt.get_width()/2, 10))
+
 
     def draw(self):
         self._clear()
-        self.screen.blit(self.game.player.image,(self.game.player.x,self.game.player.y))
-        self.screen.blit(self.game.player.image,(self.screen.get_width() - 20 ,self.game.player.y))
-        self.screen.blit(pygame.Surface((10,10)),(self.screen.get_width() / 2 - 5,self.screen.get_height() / 2 - 5))
-        
+        self.screen.blit(
+            self.game.player.image, (self.game.player.rect.x, self.game.player.rect.y)
+        )
+        self.screen.blit(
+            self.game.enemy.image, (self.game.enemy.rect.x, self.game.enemy.rect.y)
+        )
+        self.screen.blit(
+            self.game.ball.image, (self.game.ball.rect.x, self.game.ball.rect.y)
+        )
+
+        self._draw_points()
+
         pygame.display.flip()
         pygame.display.update()

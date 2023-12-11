@@ -3,6 +3,7 @@ from base.renderer import Renderer
 from base.input import Input
 from base.configuration import Configuration
 
+
 class Game(object):
     def __init__(self):
         self.renderer = Renderer(self)
@@ -13,6 +14,7 @@ class Game(object):
 
     def setup(self):
         pygame.init()
+        pygame.font.init()
         self.running = True
 
     def update(self):
@@ -25,4 +27,4 @@ class Game(object):
         raise NotImplementedError
 
     def quit(self):
-        pygame.quit()
+        self.running = False

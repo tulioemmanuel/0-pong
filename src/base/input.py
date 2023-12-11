@@ -15,6 +15,14 @@ class Input(System):
     def get_input(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.game.running = False
+                self.game.quit()
             elif event.type == pygame.KEYDOWN:
-                self.game.running = False
+                if event.key == pygame.K_ESCAPE:
+                    self.game.quit()
+                elif event.key == pygame.K_w:
+                    self.game.player.move_up()
+                elif event.key == pygame.K_s:
+                    self.game.player.move_down()
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_w or event.key == pygame.K_s:
+                    self.game.player.stop()

@@ -1,6 +1,8 @@
+import pygame
 from base.game import Game
 from base.configuration import Configuration
 from paddle import Paddle
+from ball import Ball
 
 
 class Pong(Game):
@@ -13,10 +15,31 @@ class Pong(Game):
         super().setup()
         self.settings = Configuration().settings
         self.frame_delta = 0
-        self.player = Paddle()
+        self.player = Paddle(
+            "player",
+            10,
+            self.settings["screen_height"] / 2 - self.settings["paddle_height"] / 2,
+        )
+        self.enemy = Paddle(
+            "enemy",
+            self.renderer.screen.get_width() - 20,
+            self.settings["screen_height"] / 2 - self.settings["paddle_height"] / 2,
+        )
+        self.ball = Ball(self)
+        self.player_points = 0
+        self.enemy_points = 0
+        self.renderer.update_points()
+
+    def add_point(self, who):
+        if who == "player":
+            self.player_points += 1
+        else:
+            self.enemy_points += 1
 
     def update(self):
-        pass
+        self.player.update()
+        self.enemy.update()
+        self.ball.update()
 
     def render(self):
         self.renderer.draw()
@@ -26,3 +49,7 @@ class Pong(Game):
         self.update()
         self.render()
         self.frame_delta = self.clock.tick(self.settings["FPS"])
+
+    def cleanup(self):
+        pygame.font.init()
+        pygame.quit()
