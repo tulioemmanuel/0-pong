@@ -13,10 +13,14 @@
     "paddle_color_b": 255,
     "paddle_vy": 10,
     "ball_size": 10,
+    "ball_speed": 10,
     "ball_color_r": 0,
     "ball_color_g": 0,
     "ball_color_b": 0,
     "points_color_r": 255,
     "points_color_g": 255,
-    "points_color_b": 255
+    "points_color_b": 255,
+    "stripes_w": 5,
+    "stripes_h": 30,
+    "stripes_offset": 40
 }

@@ -16,18 +16,26 @@ class Renderer(System):
         self.screen = pygame.display.set_mode(
             (self.settings["screen_width"], self.settings["screen_height"])
         )
-        
+
         if not pygame.font.get_init():
-          pygame.font.init()  
+            pygame.font.init()
 
         self.font = pygame.font.SysFont(None, 24)
 
         logging.info("Renderer initialized")
 
     def _clear(self):
-        self.screen.fill(
+        screen = self.screen
+        screen.fill(
             (self.settings["bg_r"], self.settings["bg_g"], self.settings["bg_b"])
         )
+        stripe_w = int(self.settings["stripes_w"])
+        stripe_h = int(self.settings["stripes_h"])
+        x = screen.get_width() / 2 - int(stripe_w) / 2
+        y = 0
+        while y <= screen.get_height():
+            screen.fill((255, 255, 255), pygame.Rect(x, y, stripe_w, stripe_h))
+            y += int(self.settings["stripes_offset"])
 
     def update_points(self):
         self._draw_points()
@@ -52,9 +60,17 @@ class Renderer(System):
             ),
         )
 
-        self.screen.blit(player_points_txt,(self.screen.get_width()/4 - player_points_txt.get_width()/2, 10))
-        self.screen.blit(enemy_points_txt,(3*self.screen.get_width()/4 - 3*enemy_points_txt.get_width()/2, 10))
-
+        self.screen.blit(
+            player_points_txt,
+            (self.screen.get_width() / 4 - player_points_txt.get_width() / 2, 10),
+        )
+        self.screen.blit(
+            enemy_points_txt,
+            (
+                3 * self.screen.get_width() / 4 - 3 * enemy_points_txt.get_width() / 2,
+                10,
+            ),
+        )
 
     def draw(self):
         self._clear()

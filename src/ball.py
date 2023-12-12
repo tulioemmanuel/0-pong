@@ -1,4 +1,6 @@
 import pygame
+import math
+import random
 from pygame.sprite import Group
 from base.entity import Entity
 
@@ -20,6 +22,7 @@ class Ball(Entity):
         self.game = game
         self.image = surface
         self.rect = self.image.get_rect()
+        self.ball_speed = int(self.settings["ball_speed"])
         self.reset()
 
     def reset(self):
@@ -29,7 +32,7 @@ class Ball(Entity):
         self.rect.y = (
             pygame.display.get_surface().get_height() / 2 - self.image.get_height() / 2
         )
-        self.vx = -5
+        self.vx = (1 if random.random() >= 0.5 else -1) * self.ball_speed
         self.vy = 0
 
     def update(self, *args, **kwargs):
@@ -41,16 +44,28 @@ class Ball(Entity):
     def check_collision(self):
         paddle = pygame.sprite.spritecollide(self, self.paddles, False)
         if paddle:
-            if paddle[0].name == "player":
-                self.rect.x = paddle[0].rect.x + self.rect.w
-                self.vx = 5
-            else:
-                self.vx = -5
-                self.rect.x = paddle[0].rect.x - self.rect.w
+            self.change_direction(paddle[0])
+            return
 
-        if self.rect.x == -self.rect.w:
+        if self.rect.x <= -self.rect.w:
             self.game.add_point("enemy")
             self.reset()
-        elif self.rect.x == self.game.renderer.screen.get_width() + self.rect.w:
+        elif self.rect.x >= self.game.renderer.screen.get_width():
             self.game.add_point("player")
             self.reset()
+        elif self.rect.y <= 0 or self.rect.y + self.rect.h > pygame.display.get_surface().get_height():
+            self.vy *= -1
+        
+
+    def change_direction(self, paddle):
+        paddle_hit_y = paddle.rect.y
+        ball_hit_y = self.rect.y
+        percentage = (paddle.rect.h + paddle_hit_y - ball_hit_y) / (paddle.rect.h)
+        
+        if paddle.name == "player":
+            self.rect.x = paddle.rect.x + self.rect.w
+            self.vx = self.ball_speed * math.cos(percentage)
+        else:
+            self.vx = -self.ball_speed * math.cos(percentage)
+            self.rect.x = paddle.rect.x - self.rect.w
+        self.vy = (-1 if percentage >= .5 else 1) * self.ball_speed * math.sin(percentage)
