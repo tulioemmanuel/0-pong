@@ -35,10 +35,16 @@ class Pong(Game):
             self.player_points += 1
         else:
             self.enemy_points += 1
+        self.reset_game()            
+    
+    def reset_game(self):
+        self.player.reset()
+        self.enemy.reset()
+        self.ball.reset()
 
     def update(self):
         self.player.update()
-        self.enemy.update()
+        self.enemy.ai_update(self.frame_delta,self.ball)
         self.ball.update()
 
     def render(self):

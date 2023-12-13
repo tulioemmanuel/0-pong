@@ -49,10 +49,8 @@ class Ball(Entity):
 
         if self.rect.x <= -self.rect.w:
             self.game.add_point("enemy")
-            self.reset()
         elif self.rect.x >= self.game.renderer.screen.get_width():
             self.game.add_point("player")
-            self.reset()
         elif self.rect.y <= 0 or self.rect.y + self.rect.h > pygame.display.get_surface().get_height():
             self.vy *= -1
         
@@ -65,7 +63,9 @@ class Ball(Entity):
         if paddle.name == "player":
             self.rect.x = paddle.rect.x + self.rect.w
             self.vx = self.ball_speed * math.cos(percentage)
+            self.game.enemy.ai_should_react = True
         else:
             self.vx = -self.ball_speed * math.cos(percentage)
             self.rect.x = paddle.rect.x - self.rect.w
+            self.game.enemy.ai_should_react = False
         self.vy = (-1 if percentage >= .5 else 1) * self.ball_speed * math.sin(percentage)
