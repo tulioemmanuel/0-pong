@@ -1,11 +1,14 @@
+import logging
+import os
 import pygame
 from base.renderer import Renderer
 from base.input import Input
 from base.configuration import Configuration
 
-
+logging.basicConfig(level=os.environ.get("LOGLEVEL",Configuration().settings['log_level']))
 class Game(object):
     def __init__(self):
+        logging.info('Initializing {game}'.format(game=self.__class__.__name__))
         self.renderer = Renderer(self)
         self.input = Input(self)
         self.configuration = Configuration()
@@ -27,4 +30,5 @@ class Game(object):
         raise NotImplementedError
 
     def quit(self):
+        logging.info('Quitting {game}'.format(game=self.__class__.__name__))
         self.running = False

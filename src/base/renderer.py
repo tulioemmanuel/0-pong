@@ -20,7 +20,7 @@ class Renderer(System):
         if not pygame.font.get_init():
             pygame.font.init()
 
-        self.font = pygame.font.SysFont(None, 24)
+        self.font = pygame.font.SysFont("Comic Sans MS", 24)
 
         logging.info("Renderer initialized")
 
