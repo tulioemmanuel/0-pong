@@ -21,7 +21,7 @@ class Configuration(metaclass=SingletonMeta):
 
     def __init__(self):
         assets_dir_path = os.path.join(
-            os.path.join(os.getcwd(),"..")
+            os.path.join("")
             if sys.platform == "emscripten"
             else os.path.join(os.getcwd(), Configuration.SRC_FOLDER_NAME, Configuration.ASSETS_FOLDER_NAME)
         )
