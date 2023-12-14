@@ -24,20 +24,18 @@ class Paddle(Entity):
         self.rect.x = x
         self.rect.y = y
         self.vy = 0
-
-        self.ai_reaction_time = 1000
-        self.ai_last_update = 0
         self.ai_should_react = False
 
-    def ai_update(self, delta,ball):
-        logging.info(f"Delta :{delta}")
-        logging.info(f"React :{self.ai_should_react}")
+    def ai_update(self, delta, ball):
         speed = self.settings["paddle_vy"]
         if self.ai_should_react:
-            if ball.vy > 0:
-                if self.rect.y + self.rect.height <= pygame.display.get_surface().get_height():
+            if ball.rect.y >= self.rect.y + self.rect.height / 2:
+                if (
+                    self.rect.y + self.rect.height
+                    <= pygame.display.get_surface().get_height()
+                ):
                     self.vy = speed
-            else:   
+            else:
                 if self.rect.y >= 0:
                     self.vy = -speed
             self.update()
