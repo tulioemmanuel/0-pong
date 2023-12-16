@@ -32,7 +32,8 @@ class Configuration(metaclass=SingletonMeta):
         #     else os.path.join(os.getcwd())
         # )
 
-        with open(Configuration.CONFIGURATION_JSON_FILE_NAME) as config_file:
-            config_json = json.load(config_file)
-            for key in config_json:
-                Configuration.settings[key] = config_json[key]
+        # with open(Configuration.CONFIGURATION_JSON_FILE_NAME) as config_file:
+        #     config_json = json.load(config_file)
+        #     for key in config_json:
+        #         Configuration.settings[key] = config_json[key]
+        pass
