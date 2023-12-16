@@ -24,7 +24,7 @@ class Configuration(metaclass=SingletonMeta):
         logging.info('Loading Configuration..')
         logging.info('Asset Dir path: %s'.format(assets_dir_path))
         print('Asset Dir path: %s'.format(assets_dir_path))
-        
+
         assets_dir_path = os.path.join(
             os.path.join("")
             if sys.platform == "emscripten"
@@ -33,7 +33,7 @@ class Configuration(metaclass=SingletonMeta):
 
 
         with open(
-            os.path.join(Configuration.CONFIGURATION_JSON_FILE_NAME)
+            Configuration.CONFIGURATION_JSON_FILE_NAME
         ) as config_file:
             config_json = json.load(config_file)
             for key in config_json:
