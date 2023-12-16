@@ -1,6 +1,7 @@
 import logging
 import os
 import pygame
+import sys
 from base.renderer import Renderer
 from base.input import Input
 from base.configuration import Configuration
