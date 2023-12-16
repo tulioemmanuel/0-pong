@@ -22,14 +22,15 @@ class Configuration(metaclass=SingletonMeta):
 
     def __init__(self):
         logging.info('Loading Configuration..')
+        logging.info('Asset Dir path: %s'.format(assets_dir_path))
+        print('Asset Dir path: %s'.format(assets_dir_path))
+        
         assets_dir_path = os.path.join(
             os.path.join("")
             if sys.platform == "emscripten"
             else os.path.join(os.getcwd())
         )
 
-        logging.info('Asset Dir path: %s'.format(assets_dir_path))
-        print('Asset Dir path: %s'.format(assets_dir_path))
 
         with open(
             os.path.join(Configuration.CONFIGURATION_JSON_FILE_NAME)
