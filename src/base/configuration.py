@@ -29,9 +29,10 @@ class Configuration(metaclass=SingletonMeta):
         )
 
         logging.info('Asset Dir path: %s'.format(assets_dir_path))
+        print('Asset Dir path: %s'.format(assets_dir_path))
 
         with open(
-            os.path.join(assets_dir_path, Configuration.CONFIGURATION_JSON_FILE_NAME)
+            os.path.join(Configuration.CONFIGURATION_JSON_FILE_NAME)
         ) as config_file:
             config_json = json.load(config_file)
             for key in config_json:
