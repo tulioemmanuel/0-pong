@@ -23,13 +23,9 @@ class Configuration(metaclass=SingletonMeta):
 
     def __init__(self):
 
-        assets_dir_path = os.path.join(
-            os.path.join(os.getcwd(), Configuration.SRC_FOLDER_NAME)
-            if sys.platform == "emscripten"
-            else os.path.join(os.getcwd())
-        )
+        assets_dir_path = os.path.join(os.path.join(os.getcwd(), Configuration.ASSETS_FOLDER_NAME)) if sys.platform == "emscripten" else os.path.join(os.getcwd())
 
-        with open(os.path.join(os.getcwd(), Configuration.ASSETS_FOLDER_NAME , Configuration.CONFIGURATION_JSON_FILE_NAME)) as config_file:
+        with open(os.path.join( assets_dir_path , Configuration.CONFIGURATION_JSON_FILE_NAME)) as config_file:
             config_json = json.load(config_file)
             for key in config_json:
                 Configuration.settings[key] = config_json[key]

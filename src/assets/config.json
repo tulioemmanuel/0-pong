@@ -1,8 +1,8 @@
 {
     "title": "Pong",
     "log_level":"INFO",
-    "screen_width": 800,
-    "screen_height": 600,
+    "screen_width": 400,
+    "screen_height": 300,
     "bg_r": 100,
     "bg_g": 200,
     "bg_b": 200,
