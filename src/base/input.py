@@ -26,3 +26,8 @@ class Input(System):
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or event.key == pygame.K_s:
                     self.game.player.stop()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.game.player.move_touch(pygame.mouse.get_pos())
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.game.player.stop()
+

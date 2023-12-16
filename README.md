@@ -1,2 +1,2 @@
 # TODO:
-    - debugar o build web no itch io
+    - melhorar a IA, não é possível vencer o jogo

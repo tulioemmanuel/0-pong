@@ -25,6 +25,7 @@ class Paddle(Entity):
         self.rect.y = y
         self.vy = 0
         self.ai_should_react = False
+        self.screen = pygame.display.get_surface()
 
     def ai_update(self, delta, ball):
         speed = self.settings["paddle_vy"]
@@ -49,6 +50,12 @@ class Paddle(Entity):
 
     def move_down(self):
         self.vy += self.settings["paddle_vy"]
+
+    def move_touch(self, pos):
+        if pos[1] >= self.screen.get_height()/2:
+            self.move_down()
+        else:
+            self.move_up()            
 
     def stop(self):
         self.vy = 0
